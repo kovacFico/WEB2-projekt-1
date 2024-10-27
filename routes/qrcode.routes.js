@@ -72,9 +72,9 @@ router.post('/', async function (req, res) {
             const resultTickets = (await db.query(sqlTickets, [])).rows;
             const externalUrl = process.env.RENDER_EXTERNAL_URL;
             if (externalUrl) {
-                var qrcode = await QRCode.toDataURL(externalUrl + uuid)
+                var qrcode = await QRCode.toDataURL(externalUrl + '/' + uuid)
             } else {
-                var qrcode = await QRCode.toDataURL(`http://localhost:${process.env.PORT}` + uuid)
+                var qrcode = await QRCode.toDataURL(`http://localhost:${process.env.PORT}/` + uuid)
             }
             console.log(uuid)
             
