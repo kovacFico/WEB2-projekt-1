@@ -74,7 +74,7 @@ router.post('/', async function (req, res) {
             if (externalUrl) {
                 var qrcode = await QRCode.toDataURL(externalUrl + uuid)
             } else {
-                var qrcode = await QRCode.toDataURL(`http://localhost:${port}` + uuid)
+                var qrcode = await QRCode.toDataURL(`http://localhost:${process.env.PORT}` + uuid)
             }
             console.log(uuid)
             
