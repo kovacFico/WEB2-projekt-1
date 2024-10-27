@@ -70,7 +70,12 @@ router.post('/', async function (req, res) {
             console.log(sqlGenTickets)
             const resultGenTickets = (await db.query(sqlGenTickets, [])).rows;
             const resultTickets = (await db.query(sqlTickets, [])).rows;
-            var qrcode = await QRCode.toDataURL('http://localhost:3000/' + uuid)
+
+            if (externalUrl) {
+                var qrcode = await QRCode.toDataURL(externalUrl + uuid)
+            } else {
+                var qrcode = await QRCode.toDataURL(`http://localhost:${port}` + uuid)
+            }
             console.log(uuid)
             
             res.render("qrcode", {
