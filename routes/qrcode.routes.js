@@ -31,7 +31,7 @@ router.post('/', async function (req, res) {
     const sqlTickets = `SELECT COUNT(*) FROM gen_tickets;`;
     const sqlTicketsPerVatin = `SELECT COUNT(*) FROM gen_tickets WHERE vatin = ` + req.body.user[2] + `;`;
 
-    var date = new Date().toLocaleString('en-GB',{hour12: false}).replaceAll('/', '-')
+    var date = new Date(Date.now()).toISOString().replace('T', ' ')
     
 
     try {
