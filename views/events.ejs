@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./images/logo-icon.png"/>
+    <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <script src="./scripts/main.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</head>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main home-image">
+    <% var city = null %>
+    <% for (let event of events) { %>
+        <% if (event.city !== city) { %>
+            <% if (event !== events[0]) { %>
+                </section>
+            <% } %>
+            
+            <% city = event.city %>
+            <section class="section">
+                <h1 class="city-name">
+                    <span class="main-color-emphasized"><%= event.city.toUpperCase() %></span>
+                </h1>
+                <div id="<%= event.id %>" class="centered-container">
+                    <div class="photo-box">
+                        <img class="photo-box-image" src="<%= event.imageurl %>"></img>
+                    </div>
+                    <div class="event-info">
+                        <p class="decorated-title font-secondary main-color">
+                            <span class="main-color-emphasized"><%= event.name %></span>
+                        </p>
+                        <p class="decorated-title font-secondary main-color">
+                            <span class="main-color-emphasized"><%= event.where_held %></span>
+                        </p>
+                        <p class="decorated-title font-secondary main-color">
+                            <span class="main-color-emphasized"><%= event.when_held.toString().substring(0, 16).replace(" ", ", ") %></span>
+                        </p>
+                        <p class="decorated-title font-secondary main-color">
+                            <span class="main-color-emphasized"><%= event.when_held.toString().substring(16, 21) %></span>
+                        </p>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn" onClick="showForm( <%= event.id %> )">Get tickets</button>
+                    </div>
+                </div>
+                <div class="form-container main-color-emphasized">
+                    <form class="form" action="/qrcode" method="post">
+                        <fieldset class="form-fieldset">
+                            <legend class="form-legend">Enter ticket details</legend>
+    
+                            <div class="form-group">
+                                <label class="form-label" for="username">Name:</label>
+                                <input class="form-component form-input" type="text" name="user" id="firstname"
+                                       maxlength="20" minlength="3">
+                            </div>
+    
+                            <div class="form-group">
+                                <label class="form-label" for="username">Surname:</label>
+                                <input class="form-component form-input" type="text" name="user" id="lastname"
+                                       maxlength="20" minlength="3">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="username">OIB:</label>
+                                <input class="form-component form-input" type="text" name="user" id="oib"
+                                       maxlength="20">
+                            </div>
+                            <input name="event_id" type="hidden" value="<%= event.id %>">
+
+                            <div>
+                                <input class="btn" type="submit" onClick=" location.replace('./qrcode')" value="Generate">
+                                <input class="btn" type="reset" value="Reset">
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+        <% } else { %>
+            <div id="<%= event.id %>" class="centered-container">
+                <div class="photo-box">
+                    <img class="photo-box-image" src="<%= event.imageurl %>"></img>
+                </div>
+                <div class="event-info">
+                    <p class="decorated-title font-secondary main-color">
+                        <span class="main-color-emphasized"><%= event.name %></span>
+                    </p>
+                    <p class="decorated-title font-secondary main-color">
+                        <span class="main-color-emphasized"><%= event.where_held %></span>
+                    </p>
+                    <p class="decorated-title font-secondary main-color">
+                        <span class="main-color-emphasized"><%= new Date().toDateString(event.when_held).replace(" ", ", ") %></span>
+                    </p>
+                    <p class="decorated-title font-secondary main-color">
+                        <span class="main-color-emphasized"><%= event.when_held.toString().substring(16, 21); %></span>
+                    </p>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onClick="showForm(<%= event.id %>)">Get tickets</button>
+                </div>
+            </div>
+            <div class="form-container main-color-emphasized">
+                <form class="form" action="/qrcode" method="post">
+                    <fieldset class="form-fieldset">
+                        <legend class="form-legend">Enter ticket details</legend>
+
+                        <div class="form-group">
+                            <label class="form-label" for="username">Name:</label>
+                            <input class="form-component form-input" type="text" name="user" id="firstname"
+                                    maxlength="20" minlength="3">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="username">Surname:</label>
+                            <input class="form-component form-input" type="text" name="user" id="lastname"
+                                    maxlength="20" minlength="3">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="username">OIB:</label>
+                            <input class="form-component form-input" type="text" name="user" id="oib"
+                                    maxlength="20">
+                        </div>
+                        <input name="event_id" type="hidden" value="<%= event.id %>">
+
+                        <div>
+                            <input class="btn" type="submit" onClick=" location.replace('./qrcode')" value="Generate">
+                            <input class="btn" type="reset" value="Reset">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        <% } %>
+    <% } %>
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>

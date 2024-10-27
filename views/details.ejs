@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="./images/logo-icon.png"/>
+    <link rel="stylesheet" type="text/css" href="./vendor/normalize.css">
+    <link rel="stylesheet" type="text/css" href="./styles/main.css">
+    <script src="./scripts/main.js"></script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</head>
+
+<body class="content">
+
+<%- include(`partials/header`); %>
+
+<main class="main home-image">
+    <section class="section">
+        <h1 class="city-name">
+            <span class="main-color-emphasized">TICKET DETAILS</span>
+        </h1>
+        <div class="centered-container details">
+            <div class="photo-box">
+                <img class="photo-box-image" src="<%= details.imageurl %>"></img>
+            </div>
+            <div class="event-info">
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized"><%= details.name %></span>
+                </p>
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized"><%= details.where_held %></span>
+                </p>
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized"><%= details.when_held.toString().substring(0, 16).replace(" ", ", ") %></span>
+                </p>
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized"><%= details.when_held.toString().substring(16, 21) %></span>
+                </p>
+            </div>
+            <div class="event-info">
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized">OIB:</span>
+                    <span class="main-color-emphasized" style="margin-left: 10px;"><%= details.vatin %></span>
+                </p>
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized">Name:</span>
+                    <span class="main-color-emphasized" style="margin-left: 10px;"><%= details.firstname %></span>
+                </p>
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized">Surname:</span> 
+                    <span class="main-color-emphasized" style="margin-left: 10px;"><%= details.lastname %></span>
+                </p>
+                <p class="decorated-title font-secondary main-color">
+                    <span class="main-color-emphasized">Issued:</span>
+                    <span class="main-color-emphasized" style="margin-left: 10px;"><%= details.created_at.toString().substring(0, 16).replace(" ", ", ") %> at <%= details.created_at.toString().substring(16, 21) %></span>
+                </p>
+            </div>
+        </div>
+</main>
+
+<%- include(`partials/footer`); %>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<header class="header primary-color-bg">
+    <nav class="navigation container">
+        <div class="menu">
+            <a href="/" class="link">
+                <img class="scaled-image scaled-image-fixed" src="../images/logo.png" alt="Company logo">
+            </a>
+            <a href="/events" class="link">Events</a>
+            <% if (user_name !== undefined ) { %>
+                <div class="user-info">
+                    <span class="ticket-counter"><%= user_name %></span>
+                    <a href="/logout" class="link">LOG OUT</a>  
+                </div>
+            <% } %>
+            <span class="ticket-counter">Generated tickets: <%= tickets %></span>
+        </div>
+    </nav>
+</header>
